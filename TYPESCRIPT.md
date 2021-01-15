@@ -63,7 +63,7 @@ export enum AdditionalActions {
 export interface AdditionalActionMap<T extends Entity> {
     upsert: Action<AdditionalActions.UPSERT, T>;
     readAll: Action<AdditionalActions.READ_ALL, undefined>;
-    reset: Action<AdditionalActions.REMOVE_ALL, undefined>;
+    removeAll: Action<AdditionalActions.REMOVE_ALL, undefined>;
 }
 ```
 
