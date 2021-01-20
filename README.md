@@ -26,10 +26,15 @@ npm run run:decorators
 
 Задание находится в файле RXJS.md
 
-Задание помещается в файл rxjs.ts
-
-Для того чтобы запустить нужно ввести команду
+1 задание (Оператор с кэшированием) помещается в файл cache.ts
 
 ```shell
-npm run run:rxjs
+npm run run:cache
 ```
+
+2 задание (Оператор LRU) помещается в файл lru.ts
+
+```shell
+npm run run:lru
+```
+

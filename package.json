@@ -6,7 +6,8 @@
   "scripts": {
     "build": "tsc",
     "run:decorators": "node out/decorators.js",
-    "run:rxjs": "node out/rxjs.js"
+    "run:cache": "node out/cache.js",
+    "run:lru": "node out/lru.js"
   },
   "author": "",
   "license": "ISC",
