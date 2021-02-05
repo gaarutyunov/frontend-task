@@ -69,4 +69,4 @@ export interface AdditionalActionMap<T extends Entity> {
 
 В результаты ожидается получить интерфейс, на который IDE будет реагировать следующим образом:
 
-![IDE](https://photos.app.goo.gl/5SAVubd4WRQNThpd7)
+![Screenshot](Screenshot 2021-02-05 at 10.31.11.png)
