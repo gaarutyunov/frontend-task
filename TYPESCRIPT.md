@@ -66,3 +66,7 @@ export interface AdditionalActionMap<T extends Entity> {
     removeAll: Action<AdditionalActions.REMOVE_ALL, undefined>;
 }
 ```
+
+В результаты ожидается получить интерфейс, на который IDE будет реагировать следующим образом:
+
+![IDE](https://photos.app.goo.gl/5SAVubd4WRQNThpd7)
