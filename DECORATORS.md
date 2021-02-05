@@ -1,7 +1,8 @@
-## Декораторы
+## 2. Декораторы
 
-### Написать декоратор, который можно использовать для валидации объекта
+### 1. Написать декоратор, который можно использовать для валидации объекта
 
+```typescript
 // Интерфейс с валидаторами
 export interface Validators {
     required?: boolean;
@@ -35,3 +36,4 @@ console.log('Is invalid? ', Validator.validate(person)); // Is invalid? true
 person.name = 'Test name';
 
 console.log('Is invalid? ', Validator.validate(person)); // Is invalid? false
+```
