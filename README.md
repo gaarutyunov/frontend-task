@@ -1,40 +1,98 @@
 # Задания Фронтенд
 
-## Build
+## Оператор LRU
 
-Для того чтобы сбилдить ts нужно запустить команду
+Написать оператор RxJs и функционалом LRU (last recently used) кэширования.
 
-```shell
-npm run build
+Примерные интерфейсы для оператора:
+
+```typescript
+export interface LruItem<T> {
+    // Закэшированное значение
+    value: T;
+    // Дата последнего образения к значению
+    lastUsed: Date;
+}
+
+export interface LruStore<T> {
+    [key: string]: LruItem<T>;
+}
+
+export interface Lru<T> {
+    store: LruStore<T>;
+    // Максимальное количество объектов в кэше
+    readonly bucketSize: number;
+
+    has(id: string): boolean;
+
+    get(id: string): LruItem<T> | undefined;
+
+    getValue(id: string): T | undefined;
+
+    set(id: string, value: T): void;
+
+    delete(id: string): void;
+}
 ```
 
-## TypeScript
+Так же есть функция и источник данных:
 
-Задание находится в файле TYPESCRIPT.md
+```typescript
+// Функция, которая получает объект
+export interface Get<T> {
+    (id: string): Observable<T>;
+}
 
-1 задание (Типизация) помещается в файл types.ts
+// LRU оператор функция
+export interface LruCacheFn<R> {
+    (project: Get<R>): OperatorFunction<string, R>;
+}
 
-2 задание (Декораторы) помещается в файл decorators.ts
+// Источник данных (для упрощения обычный BehaviorSubject)
+export const subject = new BehaviorSubject<Record<string, Person>>({
+    '1': {
+        id: 1,
+        name: 'First'
+    },
+    '2': {
+        id: 2,
+        name: 'Second'
+    },
+    '3': {
+        id: 3,
+        name: 'Third'
+    },
+    '4': {
+        id: 4,
+        name: 'Fourth'
+    }
+});
 
-Для того чтобы запустить нужно ввести команду
-
-```shell
-npm run run:decorators
+// Функция для получения данных
+export function get(id: string): Observable<Person | undefined> {
+    return subject.pipe(map(x => x[id]))
+}
 ```
 
-## RxJs
+При использовании оператора c bucketSize = 2 будет следующий вывод:
 
-Задание находится в файле RXJS.md
-
-1 задание (Оператор с кэшированием) помещается в файл cache.ts
-
-```shell
-npm run run:cache
+```typescript
+of('1', '1', '2', '2', '3', '1').pipe(lru(get)).subscribe(console.log);
+// Вывод 
+// { id: 1, name: 'First' }
+// Returning from cache
+// { id: 1, name: 'First' }
+// { id: 2, name: 'Second' }
+// Returning from cache
+// { id: 2, name: 'Second' }
+// { id: 3, name: 'Second' }
+// { id: 1, name: 'Second' }
 ```
 
-2 задание (Оператор LRU) помещается в файл lru.ts
+Выполнение задания осуществляется в файле lru.ts. 
+Чтобы проверить выполнение задания, нужно скомпилировать его при помощи команды `npm run build` 
+и запустить при помощи команды `npm run lru`
 
-```shell
-npm run run:lru
-```
-
+Для выполнения код из этого репозитория заливается в свой репозиторий. 
+Главное не делать fork, чтобы другие кандидаты не могли его увидеть! 
+После выполнения через каналы связи направляется ссылка на репозиторий.

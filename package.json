@@ -5,9 +5,7 @@
   "main": "main.js",
   "scripts": {
     "build": "tsc",
-    "run:decorators": "node out/decorators.js",
-    "run:cache": "node out/cache.js",
-    "run:lru": "node out/lru.js"
+    "lru": "node out/lru.js"
   },
   "author": "",
   "license": "ISC",
